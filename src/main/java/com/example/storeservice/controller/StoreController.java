@@ -3,10 +3,7 @@ package com.example.storeservice.controller;
 import com.example.storeservice.model.Store;
 import com.example.storeservice.repository.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,6 +16,11 @@ public class StoreController {
     @GetMapping("/store")
     public List<Store> getAllStore() {
         return this.storeRepository.findAll();
+    }
+
+    @GetMapping("/store/name/{name}")
+    public List<Store> getStoreByName(@PathVariable String name){
+        return storeRepository.findStoreByNameContaining(name);
     }
 
     @PostMapping("store")

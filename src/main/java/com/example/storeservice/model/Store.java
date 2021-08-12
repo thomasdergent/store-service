@@ -56,7 +56,7 @@ public class Store {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = "IKEA " + name;
     }
 
     public String getCity() {
