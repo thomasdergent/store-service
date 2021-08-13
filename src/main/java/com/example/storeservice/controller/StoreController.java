@@ -13,17 +13,28 @@ public class StoreController {
     @Autowired
     private StoreRepository storeRepository;
 
-    @GetMapping("/store")
+    @GetMapping("/stores")
     public List<Store> getAllStore() {
         return this.storeRepository.findAll();
     }
 
-    @GetMapping("/store/name/{name}")
-    public List<Store> getStoreByName(@PathVariable String name){
-        return storeRepository.findStoreByNameContaining(name);
+    @GetMapping("/stores/province/{province}")
+    public List<Store> getAllStoresByProvince(@PathVariable String province) {
+
+        return this.storeRepository.findStoresByProvinceContaining(province);
     }
 
-    @PostMapping("store")
+    @GetMapping("/store/province/{province")
+    public Store getStoreByProvince(@PathVariable String province) {
+        return storeRepository.findStoreByProvince(province);
+    }
+
+    @GetMapping("/store/{storeName}")
+    public Store getStoreByStoreName(@PathVariable String storeName) {
+        return storeRepository.findStoreByStoreName(storeName);
+    }
+
+    @PostMapping("/store")
     public Store createStore(@RequestBody Store store) {
         return this.storeRepository.save(store);
     }

@@ -10,8 +10,8 @@ public class Store {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "storeName", unique = true)
+    private String storeName;
 
     @Column(name = "province")
     private String province;
@@ -28,8 +28,8 @@ public class Store {
     public Store() {
     }
 
-    public Store (String name, String city, String street, int number) {
-        setName(name);
+    public Store (String storeName, String city, String street, int number) {
+        setStoreName(storeName);
         setCity(city);
         setStreet(street);
         setNumber(number);
@@ -51,12 +51,12 @@ public class Store {
         this.province = province;
     }
 
-    public String getName() {
-        return name;
+    public String getStoreName() {
+        return storeName;
     }
 
-    public void setName(String name) {
-        this.name = "IKEA " + name;
+    public void setStoreName(String storeName) {
+        this.storeName = "IKEA " + storeName;
     }
 
     public String getCity() {

@@ -8,5 +8,8 @@ import java.util.List;
 
 @Repository
 public interface StoreRepository extends JpaRepository<Store, Integer> {
-        List<Store> findStoreByNameContaining(String name);
+        List<Store> findStoresByProvinceContaining(String province);
+        List<Store> findStoresByStoreNameContaining(String storeName);
+        Store findStoreByStoreName(String storeName);
+        Store findStoreByProvince(String provence);
 }
