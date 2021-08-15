@@ -39,6 +39,9 @@ public class StoreController {
     //Post store for testing purposes
     @PostMapping("/store")
     public Store createStore(@RequestBody Store store) {
-        return this.storeRepository.save(store);
+
+        this.storeRepository.save(store);
+
+        return store;
     }
 }

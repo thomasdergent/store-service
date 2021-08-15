@@ -25,11 +25,12 @@ public class Store {
     @Column(name = "number")
     private int number;
 
-    public Store() {
+    public Store () {
     }
 
-    public Store (String storeName, String city, String street, int number) {
+    public Store (String storeName, String province, String city, String street, int number) {
         setStoreName(storeName);
+        setProvince(province);
         setCity(city);
         setStreet(street);
         setNumber(number);
