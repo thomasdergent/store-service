@@ -33,9 +33,9 @@ jobs:
         with:
           java-version: 8
 
-      - name: Setup Postgres database
-        uses: Daniel-Marynicz/postgresql-action@master
-
+      - name: Start PostgreSQL for integration test
+        uses: harmon758/postgresql-action@v1
+        
       - name: Test and build project
         run: mvn -f pom.xml clean install
 
