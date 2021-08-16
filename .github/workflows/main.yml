@@ -37,7 +37,7 @@ jobs:
         uses: harmon758/postgresql-action@v1.0.0
         with:
           postgresql db: db
-          postgresql user: created
+          postgresql user: power
           postgresql password: password
 
       - name: Test and build project
