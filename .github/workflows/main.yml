@@ -40,7 +40,7 @@ jobs:
           postgresql db: 'store'
           postgresql user: ${{ secrets.POSTGRESQL_USER }}
           postgresql password: ${{ secrets.POSTGRESQL_ROOT_PASSWORD }}
-          port:
+          ports:
             - '5432:5432'
 
       - name: Test and build project
