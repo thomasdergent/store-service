@@ -37,6 +37,7 @@ jobs:
         uses: harmon758/postgresql-action@v1
         with:
           postgresql version: '11'
+          postgresql password: ${{secrets.POSTGRES_PASSWORD}}
           postgresql db: 'store'
 
       - name: Test and build project
