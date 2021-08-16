@@ -52,8 +52,8 @@ jobs:
       - name: Upload Maven build artifact
         uses: actions/upload-artifact@v1
         with:
-          name: dieren-0.0.1.jar
-          path: ./target/store-0.0.1.jar
+          name: store-0.0.1.jar
+          path: ./target/store-service-0.0.1-SNAPSHOT.jar
 
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
