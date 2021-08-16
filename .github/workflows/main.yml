@@ -41,7 +41,7 @@ jobs:
           postgresql user: postgres
           postgresql password: abc123
 
-        - name: Test and build project
+      - name: Test and build project
         run: mvn -f pom.xml clean install
 
       - name: Show contents of the current working directory
@@ -60,8 +60,8 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker Build
-        run: docker build -t ${{ secrets.DOCKER_USER }}/review-service-ex:latest .
+        run: docker build -t ${{ secrets.DOCKER_USER }}/store-service-ex:latest .
 
       - name: Upload container to Docker Hub with Push
-        run: docker push ${{ secrets.DOCKER_USER }}/review-service-ex:latest
+        run: docker push ${{ secrets.DOCKER_USER }}/store-service-ex:latest
         #test
