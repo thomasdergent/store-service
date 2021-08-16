@@ -38,7 +38,7 @@ jobs:
         with:
           postgresql version: '11'
           postgresql password: ${{secrets.POSTGRES_PASSWORD}}
-          postgresql db: "store"
+          postgresql db: 'store'
 
       - name: Test and build project
         run: mvn -f pom.xml clean install
