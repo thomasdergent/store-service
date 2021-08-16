@@ -38,8 +38,8 @@ jobs:
         with:
           postgresql version: '11'  # See https://hub.docker.com/_/postgres for available versions
           postgresql db: 'store'
-          postgresql user: postgres
-          postgresql password: abc123
+          postgresql user: ${{ secrets.POSTGRESQL_USER }}
+          postgresql password: ${{ secrets.POSTGRESQL_ROOT_PASSWORD }}
 
       - name: Test and build project
         run: mvn -f pom.xml clean install
@@ -53,8 +53,8 @@ jobs:
       - name: Upload Maven build artifact
         uses: actions/upload-artifact@v1
         with:
-          name: review-service-artifact.jar
-          path: ./target/review-service-0.0.1-SNAPSHOT.jar
+          name: store-service-artifact.jar
+          path: ./target/store-service-0.0.1-SNAPSHOT.jar
 
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
