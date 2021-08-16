@@ -40,7 +40,7 @@ public class StoreControllerIntegrationTests {
 
     @AfterEach
     public void afterAllTests() {
-        //Watch out with deleteAll() methods when you have other data in the test database!
+        //Watch out with deleteAll() methods when you have other data in the test database
         storeRepository.deleteAll();
     }
 
