@@ -41,7 +41,7 @@ jobs:
           postgresql user: ${{ secrets.POSTGRESQL_USER }}
           postgresql password: ${{ secrets.POSTGRESQL_ROOT_PASSWORD }}
           port:
-            - "5432:5432"
+            - '5432:5432'
 
       - name: Test and build project
         run: mvn -f pom.xml clean install
