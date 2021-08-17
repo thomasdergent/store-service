@@ -37,7 +37,8 @@ jobs:
         uses: harmon758/postgresql-action@v1.0.0
         with:
           postgresql db: store
-          postgresql password: POSTGRES_PASSWORD
+          postgresql user: ${{ secrets.POSTGRES_USER }}
+          postgresql password: ${{ secrets.POSTGRES_PASSWORD }}
 
       - name: Test and build project
         run: mvn -f pom.xml clean install
