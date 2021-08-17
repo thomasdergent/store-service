@@ -36,7 +36,8 @@ jobs:
       - name: Start Postgres for integration test
         uses: harmon758/postgresql-action@v1.0.0
         with:
-          postgresql db: postgres
+          postgresql db: 'store'
+          postgresql user: ${{ secrets.POSTGRES_USER }}
           postgresql password: ${{ secrets.POSTGRES_PASSWORD }}
 
       - name: Test and build project
