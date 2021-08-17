@@ -36,10 +36,10 @@ jobs:
       - name: Start Postgres for integration test
         uses: harmon758/postgresql-action@v1.0.0
         with:
-        postgresql version: 12.4
-        postgresql db: postgres
-        postgresql user: root
-        postgresql password: abc123
+          postgresql version: 12.4
+          postgresql db: postgres
+          postgresql user: root
+          postgresql password: abc123
 
       - name: Test and build project
         run: mvn -f pom.xml clean install
