@@ -36,6 +36,7 @@ jobs:
       - name: Start Postgres for integration test
         uses: harmon758/postgresql-action@v1.0.0
         with:
+          postgresql version: '9.6'
           postgresql db: db
           postgresql user: power
           postgresql password: password
