@@ -3,7 +3,7 @@ package com.example.storeservice.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "postgres")
+@Table(name = "store")
 public class Store {
 
     @Id
