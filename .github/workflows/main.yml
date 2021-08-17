@@ -38,7 +38,7 @@ jobs:
         with:
           postgresql db: 'postgres'
           postgresql user: 'postgres'
-          postgresql password: "postgres"
+          postgresql password: 'postgres'
 
       - name: Test and build project
         run: mvn -f pom.xml clean install
