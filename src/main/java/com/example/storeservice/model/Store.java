@@ -8,9 +8,10 @@ public class Store {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name="id")
     private int id;
 
-    @Column(name = "storeName", unique = true)
+    @Column(name = "storeName")
     private String storeName;
 
     @Column(name = "province")
