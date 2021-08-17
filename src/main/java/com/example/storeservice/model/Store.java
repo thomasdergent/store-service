@@ -3,26 +3,21 @@ package com.example.storeservice.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "postgres")
+
 public class Store {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "storeName", unique = true)
     private String storeName;
 
-    @Column(name = "province")
     private String province;
 
-    @Column(name = "city")
     private String city;
 
-    @Column(name = "street")
     private String street;
-
-    @Column(name = "number")
+    
     private int number;
 
     public Store () {
