@@ -1,56 +1,31 @@
 package com.example.storeservice.model;
 
-import javax.persistence.*;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "store")
+
+@Document(collection = "products")
 public class Store {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="id")
-    private int id;
-
-    @Column(name = "storeName")
+    private String id;
     private String storeName;
+    private String articleNumber;
+    private int stock;
 
-    @Column(name = "province")
-    private String province;
-
-    @Column(name = "city")
-    private String city;
-
-    @Column(name = "street")
-    private String street;
-
-    @Column(name = "number")
-    private int number;
-
-    public Store () {
+    public Store() {
     }
 
-    public Store (String storeName, String province, String city, String street, int number) {
+    public Store(String storeName, String articleNumber, int stock) {
         setStoreName(storeName);
-        setProvince(province);
-        setCity(city);
-        setStreet(street);
-        setNumber(number);
+        setArticleNumber(articleNumber);
+        setStock(stock);
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
     }
 
     public String getStoreName() {
@@ -61,28 +36,20 @@ public class Store {
         this.storeName = storeName;
     }
 
-    public String getCity() {
-        return city;
+    public String getArticleNumber() {
+        return articleNumber;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setArticleNumber(String articleNumber) {
+        this.articleNumber = articleNumber;
     }
 
-    public String getStreet() {
-        return street;
+    public int getStock() {
+        return stock;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 }
 

@@ -33,12 +33,10 @@ jobs:
         with:
           java-version: 8
 
-      - name: Start Postgres for integration test
-        uses: harmon758/postgresql-action@v1.0.0
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.3.0
         with:
-          postgresql db: store
-          postgresql user: ${{ secrets.POSTGRES_USER }}
-          postgresql password: ${{ secrets.POSTGRES_PASSWORD }}
+          mongodb-version: 4.2
 
       - name: Test and build project
         run: mvn -f pom.xml clean install

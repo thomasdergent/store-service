@@ -34,54 +34,48 @@ public class StoreControllerUnitTests {
     private ObjectMapper mapper = new ObjectMapper();
 
     @Test
-    public void whenGetStoresr_thenReturnStores() throws Exception {
+    public void givenStore_whenGetStoresByArticleNumber_thenReturnStores() throws Exception {
 
-         Store store1 = new Store("IKEA Hasselt", "Limburg", "Hasselt", "teststraat", 1);
-         Store store2 = new Store("IKEA Wilrijk", "Antwerpen", "Wilrijk", "teststraat", 2);
+        Store store1 = new Store("IKEA Hasselt", "integration123", 100);
+        Store store2 = new Store("IKEA Wilrijk", "integration123", 200);
 
         List<Store> storeList = new ArrayList<>();
         storeList.add(store1);
         storeList.add(store2);
 
-        given(storeRepository.findAll()).willReturn(storeList);
+        given(storeRepository.findStoresByArticleNumber("integration123")).willReturn(storeList);
 
-        mockMvc.perform(get("/stores", "IKEA Hasselt"))
+        mockMvc.perform(get("/stores/product/{articleNumber}", "integration123"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].storeName", is("IKEA Hasselt")))
-                .andExpect(jsonPath("$[0].province", is("Limburg")))
-                .andExpect(jsonPath("$[0].city", is("Hasselt")))
-                .andExpect(jsonPath("$[0].street", is("teststraat")))
-                .andExpect(jsonPath("$[0].number", is(1)))
+                .andExpect(jsonPath("$[0].articleNumber", is("integration123")))
+                .andExpect(jsonPath("$[0].stock", is(100)))
                 .andExpect(jsonPath("$[1].storeName", is("IKEA Wilrijk")))
-                .andExpect(jsonPath("$[1].province", is("Antwerpen")))
-                .andExpect(jsonPath("$[1].city", is("Wilrijk")))
-                .andExpect(jsonPath("$[1].street", is("teststraat")))
-                .andExpect(jsonPath("$[1].number", is(2)));
+                .andExpect(jsonPath("$[1].articleNumber", is("integration123")))
+                .andExpect(jsonPath("$[1].stock", is(200)));
     }
 
     @Test
-    public void whenGetStoreByStoreName_thenReturnJsonStore() throws Exception {
+    public void givenStore_whenGetStoreByArticleNumberAndStoreName_thenReturnJsonStore() throws Exception {
 
-        Store store1 = new Store("IKEA Hasselt", "Limburg", "Hasselt", "teststraat", 1);
+        Store store1 = new Store("IKEA Hasselt", "integration123", 100);
 
-        given(storeRepository.findStoreByStoreName("IKEA Hasselt")).willReturn(store1);
+        given(storeRepository.findStoreByArticleNumberAndAndStoreName("integration123", "IKEA Hasselt")).willReturn(store1);
 
-        mockMvc.perform(get("/store/{storeName}", store1.getStoreName()))
+        mockMvc.perform(get("/product/{articleNumber}/store/{storeName}", store1.getArticleNumber(), store1.getStoreName()))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.storeName", is("IKEA Hasselt")))
-                .andExpect(jsonPath("$.province", is("Limburg")))
-                .andExpect(jsonPath("$.city", is("Hasselt")))
-                .andExpect(jsonPath("$.street", is("teststraat")))
-                .andExpect(jsonPath("$.number", is(1)));
+                .andExpect(jsonPath("$.articleNumber", is("integration123")))
+                .andExpect(jsonPath("$.stock", is(100)));
     }
 
     @Test
     public void whenPostStore_thenReturnJsonStore() throws Exception {
 
-        Store store1 = new Store("IKEA Hasselt", "Limburg", "Hasselt", "teststraat", 1);
+        Store store1 = new Store("IKEA Hasselt", "integration123", 100);
 
         mockMvc.perform(post("/store")
                 .content(mapper.writeValueAsString(store1))
@@ -89,9 +83,48 @@ public class StoreControllerUnitTests {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.storeName", is("IKEA Hasselt")))
-                .andExpect(jsonPath("$.province", is("Limburg")))
-                .andExpect(jsonPath("$.city", is("Hasselt")))
-                .andExpect(jsonPath("$.street", is("teststraat")))
-                .andExpect(jsonPath("$.number", is(1)));
+                .andExpect(jsonPath("$.articleNumber", is("integration123")))
+                .andExpect(jsonPath("$.stock", is(100)));
+    }
+
+    @Test
+    public void givenStore_whenPutStoreByArticleNumberAndStoreName_thenReturnJsonStore() throws Exception {
+
+        Store store1 = new Store("IKEA Hasselt", "integration123", 100);
+
+        given(storeRepository.findStoreByArticleNumberAndAndStoreName("integration123", "IKEA Hasselt")).willReturn(store1);
+
+        Store updatedStore = new Store("IKEA Hasselt", "integration123", 400);
+
+        mockMvc.perform(put("/product/{articleNumber}/store/{storeName}", store1.getArticleNumber(), store1.getStoreName())
+                .content(mapper.writeValueAsString(updatedStore))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.storeName", is("IKEA Hasselt")))
+                .andExpect(jsonPath("$.articleNumber", is("integration123")))
+                .andExpect(jsonPath("$.stock", is(400)));
+    }
+
+    @Test
+    public void givenStore__whenDeleteStoreByArticleNumberAndStoreName_thenStatusOk() throws Exception {
+
+        Store storeToBeDeleted = new Store("IKEA Hasselt", "integration123", 100);
+
+        given(storeRepository.findStoreByArticleNumberAndAndStoreName("integration123", "IKEA Hasselt")).willReturn(storeToBeDeleted);
+
+        mockMvc.perform(delete("/product/{articleNumber}/store/{storeName}", storeToBeDeleted.getArticleNumber(), storeToBeDeleted.getStoreName())
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void givenNoStore_whenDeleteStoreByArticleNumberAndStoreName_thenStatusNotFound() throws Exception {
+
+        given(storeRepository.findStoreByArticleNumberAndAndStoreName("badArticleNumber", "badStoreName")).willReturn(null);
+
+        mockMvc.perform(delete("/product/badArticleNumber/store/badStoreName")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
     }
 }
