@@ -34,7 +34,7 @@ public class StoreControllerUnitTests {
     private ObjectMapper mapper = new ObjectMapper();
 
     @Test
-    public void givenStore_whenGetStoresByArticleNumber_thenReturnStores() throws Exception {
+    public void whenGetStoresByArticleNumber_thenReturnStores() throws Exception {
 
         Store store1 = new Store("IKEA Hasselt", "integration123", 100);
         Store store2 = new Store("IKEA Wilrijk", "integration123", 200);
@@ -58,7 +58,7 @@ public class StoreControllerUnitTests {
     }
 
     @Test
-    public void givenStore_whenGetStoreByArticleNumberAndStoreName_thenReturnJsonStore() throws Exception {
+    public void whenGetStoreByArticleNumberAndStoreName_thenReturnJsonStore() throws Exception {
 
         Store store1 = new Store("IKEA Hasselt", "integration123", 100);
 
@@ -88,7 +88,7 @@ public class StoreControllerUnitTests {
     }
 
     @Test
-    public void givenStore_whenPutStoreByArticleNumberAndStoreName_thenReturnJsonStore() throws Exception {
+    public void whenPutStoreByArticleNumberAndStoreName_thenReturnJsonStore() throws Exception {
 
         Store store1 = new Store("IKEA Hasselt", "integration123", 100);
 
@@ -107,7 +107,7 @@ public class StoreControllerUnitTests {
     }
 
     @Test
-    public void givenStore__whenDeleteStoreByArticleNumberAndStoreName_thenStatusOk() throws Exception {
+    public void whenDeleteStoreByArticleNumberAndStoreName_thenStatusOk() throws Exception {
 
         Store storeToBeDeleted = new Store("IKEA Hasselt", "integration123", 100);
 
@@ -119,7 +119,7 @@ public class StoreControllerUnitTests {
     }
 
     @Test
-    public void givenNoStore_whenDeleteStoreByArticleNumberAndStoreName_thenStatusNotFound() throws Exception {
+    public void henDeleteStoreByArticleNumberAndStoreName_thenStatusNotFound() throws Exception {
 
         given(storeRepository.findStoreByArticleNumberAndAndStoreName("badArticleNumber", "badStoreName")).willReturn(null);
 

@@ -20,24 +20,13 @@ public class StoreController {
         return this.storeRepository.findStoresByArticleNumber(articleNumber);
     }
 
-//    @GetMapping("/stores/province/{province}")
-//    public List<Store> getAllStoresByProvince(@PathVariable String province) {
-//
-//        return this.storeRepository.findStoresByProvinceContaining(province);
-//    }
-//
-//    @GetMapping("/store/province/{province")
-//    public Store getStoreByProvince(@PathVariable String province) {
-//        return storeRepository.findStoreByProvince(province);
-//    }
-
     //Get specific store
     @GetMapping("/product/{articleNumber}/store/{storeName}")
     public Store getStoreByStoreName(@PathVariable String articleNumber, @PathVariable String storeName) {
         return storeRepository.findStoreByArticleNumberAndAndStoreName(articleNumber, storeName);
     }
 
-    //Post store for testing purposes
+    //Post store
     @PostMapping("/store")
     public Store createStore(@RequestBody Store store) {
 
@@ -46,7 +35,7 @@ public class StoreController {
         return store;
     }
 
-    //Update specific product from specific store
+    //Update store
     @PutMapping("/product/{articleNumber}/store/{storeName}")
     public Store edit(@PathVariable String articleNumber, @PathVariable String storeName, @RequestBody Store updatedStore) {
         Store retrivedStore = storeRepository.findStoreByArticleNumberAndAndStoreName(articleNumber, storeName);
@@ -60,7 +49,7 @@ public class StoreController {
         return retrivedStore;
     }
 
-    //Delete specific product from specific store
+    //Delete store
     @DeleteMapping("/product/{articleNumber}/store/{storeName}")
     public ResponseEntity deleteStore(@PathVariable String articleNumber, @PathVariable String storeName) {
         Store store = storeRepository.findStoreByArticleNumberAndAndStoreName(articleNumber, storeName);
